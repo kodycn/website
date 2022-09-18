@@ -6,22 +6,26 @@ on:
     types: [opened, synchronize, reopened, closed]
   push:
 
+defaults:
+  run:
+    working-directory: theme
 jobs:
   preview:
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./theme
+    defaults:
+      run:
+        working-directory: theme
     steps:
       - uses: actions/checkout@v2
       - uses: afc163/surge-preview@v1
         run: ls -R
-        working-directory: ${{env.working-directory}}
         with:
           surge_token: ${{ secrets.SURGE_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           dist: public
           teardown: 'true'
           failOnError: 'true'
+          cache-dependency-path: theme/package-lock.json
           build: |
             npm install
             npm run build
