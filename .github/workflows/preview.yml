@@ -1,10 +1,6 @@
 name: 🔂 Surge PR Preview
 
-on:
-  pull_request:
-    # when using teardown: 'true', add default event types + closed event type
-    types: [pull_request]
-  push:
+on: [pull_request]
 
 defaults:
   run:
