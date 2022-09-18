@@ -3,7 +3,7 @@ name: 🔂 Surge PR Preview
 on:
   pull_request:
     # when using teardown: 'true', add default event types + closed event type
-    types: [opened, synchronize, reopened, closed]
+    types: [pull_request]
   push:
 
 defaults:
@@ -23,7 +23,6 @@ jobs:
           surge_token: ${{ secrets.SURGE_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           dist: public
-          teardown: 'true'
           failOnError: 'true'
           cache-dependency-path: theme/package-lock.json
           build: |
